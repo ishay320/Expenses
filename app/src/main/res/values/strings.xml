@@ -1,0 +1,7 @@
+<resources>
+    <string name="fuel">Fuel</string>
+    <string name="money">Money</string>
+    <string name="liters">Liters</string>
+    <string name="app_name">Expenses</string>
+    <string name="km">KM</string>
+</resources>
