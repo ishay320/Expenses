@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    private Button button_calculate, button_save;
+    private Button button_save;
     private EditText edit_text_money, edit_text_liters, edit_text_KM;
     private TextView liters_in_hundred_KM, price_of_liter, KM_per_liter;
     EditText test;
@@ -28,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
         liters_in_hundred_KM = findViewById(R.id.LiterIn100);
         price_of_liter = findViewById(R.id.PriceOfLiter);
         KM_per_liter = findViewById(R.id.KMPerLiter);
-        edit_text_money = ((EditText)findViewById(R.id.TextMoney));
-        edit_text_liters = ((EditText)findViewById(R.id.TextLiters));
-        edit_text_KM = ((EditText)findViewById(R.id.TextKM));
+        edit_text_money = (findViewById(R.id.TextMoney));
+        edit_text_liters = (findViewById(R.id.TextLiters));
+        edit_text_KM = (findViewById(R.id.TextKM));
         //apply listener for all text
         EditText edit_arr[] = {edit_text_money, edit_text_liters, edit_text_KM};
         for (EditText edit_tmp:edit_arr
@@ -47,11 +47,21 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void afterTextChanged(Editable editable) {
                     refreshText();
-
                 }
             });
         }
+        button_save = findViewById(R.id.button_save);
+        button_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
     }
+
+    /**
+     * refresh the text on screen
+     */
     void refreshText(){
         double money = getDoubleFromEditText(edit_text_money);
         double liters = getDoubleFromEditText(edit_text_liters);
@@ -62,9 +72,9 @@ public class MainActivity extends AppCompatActivity {
         double liter_price_in_hundred = km_per_liter_number!= 0 ? 100/km_per_liter_number : 0;
 
         //setting the numbers in the screen
-        price_of_liter.setText(String.format("price of liter: %.2f", price));
-        KM_per_liter.setText(String.format("1 liter is %.2f KM", km_per_liter_number));
-        liters_in_hundred_KM.setText(String.format("100 KM is %.2f liter", liter_price_in_hundred));
+        price_of_liter.setText(String.format("%.2f", price));
+        KM_per_liter.setText(String.format("%.2f", km_per_liter_number));
+        liters_in_hundred_KM.setText(String.format("%.2f", liter_price_in_hundred));
     }
 
     /**
