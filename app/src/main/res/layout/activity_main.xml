@@ -141,7 +141,7 @@
                 android:id="@+id/PriceOfLiter"
                 android:layout_width="229dp"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="0.00"
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
@@ -170,7 +170,7 @@
                 android:id="@+id/KMPerLiter"
                 android:layout_width="229dp"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="0.00"
                 android:textAlignment="center"
                 android:textSize="24sp" />
         </LinearLayout>
@@ -198,7 +198,7 @@
                 android:id="@+id/LiterIn100"
                 android:layout_width="229dp"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="0.00"
                 android:textAlignment="center"
                 android:textSize="24sp" />
         </LinearLayout>
