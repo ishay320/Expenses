@@ -13,7 +13,7 @@
             android:name=".ManualInput"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".FuelActivity"
             android:exported="true" />
         <activity
             android:name=".MainMenu"

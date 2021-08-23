@@ -19,7 +19,7 @@ public class MainMenu extends AppCompatActivity {
         button_fuel_calculation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                start_activity(MainActivity.class);
+                start_activity(FuelActivity.class);
             }
         });
         button_manual_input.setOnClickListener(new View.OnClickListener() {

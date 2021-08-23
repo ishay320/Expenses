@@ -9,9 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class FuelActivity extends AppCompatActivity {
     private Button button_save;
     private EditText edit_text_money, edit_text_liters, edit_text_KM;
     private TextView liters_in_hundred_KM, price_of_liter, KM_per_liter;
@@ -20,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_fuel);
         attach_events();
     }
 
