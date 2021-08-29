@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FuelActivity">
+    tools:context="com.i320.expenses.FuelActivity">
 
 
     <EditText
@@ -97,14 +97,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.74" />
 
-    <Button
-        android:id="@+id/button_update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="update"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+<!--    <Button-->
+<!--        android:id="@+id/button_update"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="update"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />-->
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -212,14 +212,14 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="delete"
-        android:textColor="@android:color/holo_red_dark"
-        app:layout_constraintEnd_toEndOf="@+id/button_update"
-        app:layout_constraintStart_toStartOf="@+id/button_update"
-        app:layout_constraintTop_toBottomOf="@+id/button_update" />
+<!--    <Button-->
+<!--        android:id="@+id/button_delete"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="delete"-->
+<!--        android:textColor="@android:color/holo_red_dark"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/button_update"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/button_update"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/button_update" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

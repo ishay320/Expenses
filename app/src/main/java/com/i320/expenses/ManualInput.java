@@ -1,8 +1,10 @@
-package com.example.expenses;
+package com.i320.expenses;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.example.expenses.R;
 
 public class ManualInput extends AppCompatActivity {
 
