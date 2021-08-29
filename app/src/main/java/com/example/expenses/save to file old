@@ -1,0 +1,237 @@
+old FuelActivity
+
+
+
+package com.example.expenses;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.Date;
+
+public class FuelActivity extends AppCompatActivity {
+    private Button button_save, button_clear,button_show_history;
+    private EditText edit_text_money, edit_text_liters, edit_text_KM;
+    private TextView liters_in_hundred_KM, price_of_liter, KM_per_liter;
+    EditText test;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_fuel);
+        attach_events();
+    }
+
+    private void attach_events(){
+        liters_in_hundred_KM = findViewById(R.id.LiterIn100);
+        price_of_liter = findViewById(R.id.PriceOfLiter);
+        KM_per_liter = findViewById(R.id.KMPerLiter);
+        edit_text_money = (findViewById(R.id.TextMoney));
+        edit_text_liters = (findViewById(R.id.TextLiters));
+        edit_text_KM = (findViewById(R.id.TextKM));
+        //apply listener for all text
+        EditText edit_arr[] = {edit_text_money, edit_text_liters, edit_text_KM};
+        for (EditText edit_tmp:edit_arr
+             ) {
+            edit_tmp.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    refreshText();
+                }
+            });
+        }
+
+        //TODO: add functionality and save to drive
+        button_save = findViewById(R.id.button_save);
+        button_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { // date and time , money , liters , km
+                String tmp_str = java.text.DateFormat.getDateTimeInstance().format(new Date());;
+                tmp_str += "|";
+                tmp_str += getDoubleFromEditText(edit_text_money);
+                tmp_str += "|";
+                tmp_str += getDoubleFromEditText(edit_text_liters);
+                tmp_str += "|";
+                tmp_str += getDoubleFromEditText(edit_text_KM);
+                tmp_str += "\n";
+                writeToFile(tmp_str,getApplicationContext());
+                Toast.makeText(FuelActivity.this,"saved",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        button_clear = findViewById(R.id.button_clear_history);
+        button_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ClearFile(getApplicationContext());
+                Toast.makeText(FuelActivity.this,"all deleted",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        button_show_history = findViewById(R.id.button_show_history);
+        button_show_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                start_activity(FuelHistoryActivity.class);
+            }
+        });
+
+    }
+
+    /**
+     * refresh the text on screen
+     */
+    void refreshText(){
+        double money = getDoubleFromEditText(edit_text_money);
+        double liters = getDoubleFromEditText(edit_text_liters);
+        double km = getDoubleFromEditText(edit_text_KM);
+
+        double price = liters!= 0 ? money/liters : 0;
+        double km_per_liter_number = liters!= 0 ? km/liters : 0;
+        double liter_price_in_hundred = km_per_liter_number!= 0 ? 100/km_per_liter_number : 0;
+
+        //setting the numbers in the screen
+        price_of_liter.setText(String.format("%.2f", price));
+        KM_per_liter.setText(String.format("%.2f", km_per_liter_number));
+        liters_in_hundred_KM.setText(String.format("%.2f", liter_price_in_hundred));
+    }
+
+    /**
+     * get double from EditText
+     * @param text
+     * @return the number and 0 if nothing inside
+     */
+    double getDoubleFromEditText(EditText text){
+        String tmp_str = text.getText().toString();
+        return Double.parseDouble(tmp_str.equals("") ? "0":tmp_str);
+    }
+
+    /**
+     * write to file
+     * @param data
+     * @param context
+     */
+    private void writeToFile(String data, Context context) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("fuel_data.txt", Context.MODE_APPEND));
+            outputStreamWriter.append(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+    private void ClearFile(Context context) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("fuel_data.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.flush();
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+    /**
+     * read from file
+     * @param context
+     * @return
+     */
+    private String readFromFile(Context context) {
+
+        String ret = "";
+
+        try {
+            InputStream inputStream = context.openFileInput("fuel_data.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+                if((receiveString = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(receiveString);
+                }
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append("\n").append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return ret;
+    }
+
+    void start_activity(Class<?> next_activity){
+        Intent intent = new Intent(this,next_activity);
+        startActivity(intent);
+    }
+
+}
+//                Toast.makeText(getApplicationContext(),str,Toast.LENGTH_LONG).show();
+
+
+
+  /**
+     * read list from file
+     * @param context
+     * @return
+     */
+    private ArrayList<String> readListFromFile(Context context) {
+        ArrayList<String> file_list = new ArrayList<>();
+        String ret = "";
+
+        try {
+            InputStream inputStream = context.openFileInput("fuel_data.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    file_list.add(receiveString);
+                }
+                inputStream.close();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return file_list;
+    }

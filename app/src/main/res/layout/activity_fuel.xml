@@ -212,4 +212,24 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/button_clear_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="clear history"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_show_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show history"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_save" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
