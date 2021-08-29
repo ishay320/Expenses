@@ -1,29 +1,27 @@
 package com.example.expenses;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class FuelHistoryActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     ArrayList<String> fuel_id,fuel_time,fuel_money,fuel_liter,fuel_km;
-    DataBaseHelper myBD;
+    DataBaseHelperFuel myBD;
     CustomAdapter customAdapter;
 
     @Override
@@ -33,7 +31,7 @@ public class FuelHistoryActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycle_view);
 
-        myBD = new DataBaseHelper(FuelHistoryActivity.this);
+        myBD = new DataBaseHelperFuel(FuelHistoryActivity.this);
         fuel_id = new ArrayList<>();
         fuel_time = new ArrayList<>();
         fuel_money = new ArrayList<>();
@@ -42,11 +40,42 @@ public class FuelHistoryActivity extends AppCompatActivity {
 
         storeDataInArrays();
 
-        customAdapter = new CustomAdapter(FuelHistoryActivity.this,fuel_id,fuel_time,fuel_money,fuel_liter,fuel_km);
+        customAdapter = new CustomAdapter(this,FuelHistoryActivity.this,fuel_id,fuel_time,fuel_money,fuel_liter,fuel_km);
 
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(FuelHistoryActivity.this));
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1){
+            recreate();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mymenu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.delete_all){
+            DataBaseHelperFuel myDB = new DataBaseHelperFuel(FuelHistoryActivity.this);
+            myDB.removeAllData();
+
+            //way to update screen beautifully
+            Intent intent = new Intent(this,FuelHistoryActivity.class);
+            startActivity(intent);
+            finish();
+
+            Toast.makeText(this, "Delete all", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     void storeDataInArrays(){
@@ -54,6 +83,8 @@ public class FuelHistoryActivity extends AppCompatActivity {
         if (cursor.getCount() == 0){
             Toast.makeText(this,"no data",Toast.LENGTH_SHORT).show();
         }else {
+            findViewById(R.id.imageView_empty).setVisibility(View.INVISIBLE);
+            findViewById(R.id.textView_empty).setVisibility(View.INVISIBLE);
             while (cursor.moveToNext()){
                 fuel_id.add(cursor.getString(0));
                 fuel_time.add(cursor.getString(1));

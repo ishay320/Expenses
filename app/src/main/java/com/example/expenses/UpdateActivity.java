@@ -1,7 +1,10 @@
 package com.example.expenses;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,29 +16,34 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.time.Year;
 import java.util.Date;
 
-public class FuelActivity extends AppCompatActivity {
-    private Button button_save, button_clear,button_show_history;
+public class UpdateActivity extends AppCompatActivity {
+    private Button button_update, button_delete;
     private EditText edit_text_money, edit_text_liters, edit_text_KM;
     private TextView liters_in_hundred_KM, price_of_liter, KM_per_liter;
-
+    private String id,time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fuel);
+        setContentView(R.layout.activity_update);
 
-        //connect the text to show
-        liters_in_hundred_KM = findViewById(R.id.LiterIn100);
-        price_of_liter = findViewById(R.id.PriceOfLiter);
-        KM_per_liter = findViewById(R.id.KMPerLiter);
+        button_update = findViewById(R.id.button_update);
+        button_delete = findViewById(R.id.button_delete);
+        edit_text_money = findViewById(R.id.TextMoney2);
+        edit_text_liters = findViewById(R.id.TextLiters2);
+        edit_text_KM = findViewById(R.id.TextKM2);
+        liters_in_hundred_KM = findViewById(R.id.LiterIn1002);
+        price_of_liter = findViewById(R.id.PriceOfLiter2);
+        KM_per_liter = findViewById(R.id.KMPerLiter2);
+        getIntentData();
+        refreshText();
 
-        //connect the input
-        edit_text_money = findViewById(R.id.TextMoney);
-        edit_text_liters = findViewById(R.id.TextLiters);
-        edit_text_KM = findViewById(R.id.TextKM);
+        //action bar
+        ActionBar ab = getSupportActionBar();
 
-        //apply listener for updating all text
+
         EditText edit_arr[] = {edit_text_money, edit_text_liters, edit_text_KM};
         for (EditText edit_tmp:edit_arr
         ) {
@@ -55,43 +63,45 @@ public class FuelActivity extends AppCompatActivity {
             });
         }
 
-        //set the save button
-        button_save = findViewById(R.id.button_save);
-        button_save.setOnClickListener(new View.OnClickListener() {
+        button_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { // date and time , money , liters , km
-                DataBaseHelperFuel myDB = new DataBaseHelperFuel(FuelActivity.this);
+                DataBaseHelperFuel myDB = new DataBaseHelperFuel(UpdateActivity.this);
 
-                java.util.Date date = new Date();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String format = formatter.format(date);
-
-                myDB.addFuel(format,
+                myDB.updateData(id,time,
                         getDoubleFromEditText(edit_text_money),
                         getDoubleFromEditText(edit_text_liters),
                         getDoubleFromEditText(edit_text_KM));
             }
         });
-        //set the delete button - for debug
-        button_clear = findViewById(R.id.button_clear_history);
-        button_clear.setOnClickListener(new View.OnClickListener() {
+
+        button_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DataBaseHelperFuel myDB = new DataBaseHelperFuel(FuelActivity.this);
-                myDB.removeAllData();
-                Toast.makeText(FuelActivity.this,"all deleted",Toast.LENGTH_SHORT).show();
+                confirmDialog();
             }
         });
+    }
 
-        button_show_history = findViewById(R.id.button_show_history);
-        button_show_history.setOnClickListener(new View.OnClickListener() {
+    void confirmDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("delete?");
+        builder.setMessage("Are you sure you want to delete that?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                start_activity(FuelHistoryActivity.class);
+            public void onClick(DialogInterface dialogInterface, int i) {
+                DataBaseHelperFuel myDB = new DataBaseHelperFuel(UpdateActivity.this);
+                myDB.deleteRow(id);
+                finish();
             }
-        });    }
-
-
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+        builder.create().show();
+    }
     /**
      * refresh the text on screen
      */
@@ -125,5 +135,17 @@ public class FuelActivity extends AppCompatActivity {
         Intent intent = new Intent(this,next_activity);
         startActivity(intent);
     }
-
+    void getIntentData(){
+        if (getIntent().hasExtra("id") && getIntent().hasExtra("money") &&
+                getIntent().hasExtra("liter") && getIntent().hasExtra("km") &&
+                getIntent().hasExtra("time")){
+            id = getIntent().getStringExtra("id");
+            time = getIntent().getStringExtra("time");
+            edit_text_money.setText(getIntent().getStringExtra("money"));
+            edit_text_liters.setText(getIntent().getStringExtra("liter"));
+            edit_text_KM.setText(getIntent().getStringExtra("km"));
+        }else {
+            Toast.makeText(this, "no data", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
