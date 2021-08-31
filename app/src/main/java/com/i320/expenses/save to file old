@@ -3,11 +3,32 @@ the big data base:
 
 id
 name of product
-price
+price  -- actual price
 number of products
 store name
 product serial number
-weight - price of kg
+weight - if not 0\null then calculate the price
+///////maybe weight of the product?
+
+
+CREATE TABLE `products` (
+	`_id` INT NOT NULL AUTO_INCREMENT,
+	`product_name` TEXT NOT NULL,
+	`price` DECIMAL NOT NULL,
+	`serial_number` INT,
+	`store_name` TEXT,
+	`weight` DECIMAL unsigned zerofill,
+	UNIQUE KEY `id` (`_id`) USING BTREE,
+	PRIMARY KEY (`_id`,`serial_number`)
+);
+
+example:
+
+_id  |  product_name  |  price  |  serial_number  |  store_name  |  weight
+12      potato           12        null              shefa isaschar 2.53
+14      phone            703       94423455514       snir phones    null
+90      cards            10        null              null           null
+
 
 
 TODO:
