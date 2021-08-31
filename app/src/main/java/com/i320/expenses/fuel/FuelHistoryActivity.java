@@ -1,5 +1,7 @@
 package com.i320.expenses.fuel;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -75,17 +78,38 @@ public class FuelHistoryActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.delete_all) {
-            FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelHistoryActivity.this);
-            myDB.removeAllData();
-
-            //way to update screen beautifully
-            Intent intent = new Intent(this, FuelHistoryActivity.class);
-            startActivity(intent);
-            finish();
-
-            Toast.makeText(this, "Delete all", Toast.LENGTH_SHORT).show();
+            confirmDialog(this);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * ask for confirmation and delete one row
+     */
+    void confirmDialog(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("delete all?");
+        builder.setMessage("Are you sure you want to delete that?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelHistoryActivity.this);
+                myDB.removeAllData();
+
+                //way to update screen beautifully
+                Intent intent = new Intent(context, FuelHistoryActivity.class);
+                startActivity(intent);
+                finish();
+
+                Toast.makeText(context, "all deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+        builder.create().show();
     }
 
     /**

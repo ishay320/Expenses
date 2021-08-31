@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +30,7 @@ public class FuelCalculatorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fuel);
+        setContentView(R.layout.activity_fuel_calculator);
 
         //connect the text to show the sum
         liters_in_hundred_KM = findViewById(R.id.LiterIn100);
@@ -63,23 +62,23 @@ public class FuelCalculatorActivity extends AppCompatActivity {
             });
         }
 
-        //set the save button
-        button_save = findViewById(R.id.button_save);
-        button_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelCalculatorActivity.this);
-
-                java.util.Date date = new Date();
-                @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String format = formatter.format(date);
-
-                myDB.addRow(format,
-                        getDoubleFromEditText(edit_text_money),
-                        getDoubleFromEditText(edit_text_liters),
-                        getDoubleFromEditText(edit_text_KM));
-            }
-        });
+//        //set the save button
+//        button_save = findViewById(R.id.button_save);
+//        button_save.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelCalculatorActivity.this);
+//
+//                java.util.Date date = new Date();
+//                @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                String format = formatter.format(date);
+//
+//                myDB.addRow(format,
+//                        getDoubleFromEditText(edit_text_money),
+//                        getDoubleFromEditText(edit_text_liters),
+//                        getDoubleFromEditText(edit_text_KM));
+//            }
+//        });
 
         //history button
         button_show_history = findViewById(R.id.button_show_history);
@@ -116,7 +115,7 @@ public class FuelCalculatorActivity extends AppCompatActivity {
 
         }else if (item.getItemId() == R.id.setting){
             //go to setting
-            //start_activity();
+            start_activity(FuelSettingsActivity.class);
         }
         return super.onOptionsItemSelected(item);
     }
