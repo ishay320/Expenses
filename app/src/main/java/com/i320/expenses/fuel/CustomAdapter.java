@@ -1,4 +1,4 @@
-package com.i320.expenses;
+package com.i320.expenses.fuel;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -62,7 +62,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.main_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, UpdateActivity.class);
+                Intent intent = new Intent(context, FuelUpdateActivity.class);
                 intent.putExtra("id", String.valueOf(fuel_id.get(position)));
                 intent.putExtra("money", String.valueOf(fuel_money.get(position)));
                 intent.putExtra("liter", String.valueOf(fuel_liter.get(position)));

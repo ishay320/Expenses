@@ -1,4 +1,4 @@
-package com.i320.expenses;
+package com.i320.expenses.fuel;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,8 +8,6 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.expenses.R;
 
-public class UpdateActivity extends AppCompatActivity {
+public class FuelUpdateActivity extends AppCompatActivity {
 
     //private Button button_update, button_delete;
     private EditText edit_text_money, edit_text_liters, edit_text_KM;
@@ -65,7 +63,7 @@ public class UpdateActivity extends AppCompatActivity {
 //        button_update.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                DataBaseHelperFuel myDB = new DataBaseHelperFuel(UpdateActivity.this);
+//                FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelUpdateActivity.this);
 //
 //                myDB.updateData(id, time,
 //                        getDoubleFromEditText(edit_text_money),
@@ -94,7 +92,7 @@ public class UpdateActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.save) {
-            DataBaseHelperFuel myDB = new DataBaseHelperFuel(UpdateActivity.this);
+            FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelUpdateActivity.this);
 
             myDB.updateData(id, time,
                     getDoubleFromEditText(edit_text_money),
@@ -118,7 +116,7 @@ public class UpdateActivity extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                DataBaseHelperFuel myDB = new DataBaseHelperFuel(UpdateActivity.this);
+                FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelUpdateActivity.this);
                 myDB.deleteRow(id);
                 finish();
             }

@@ -8,6 +8,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.expenses.R;
+import com.i320.expenses.fuel.FuelCalculatorActivity;
 
 public class MainMenu extends AppCompatActivity {
     Button button_fuel_calculation, button_manual_input, button_camera_input;
@@ -23,7 +24,7 @@ public class MainMenu extends AppCompatActivity {
         button_fuel_calculation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                start_activity(FuelActivity.class);
+                start_activity(FuelCalculatorActivity.class);
             }
         });
 

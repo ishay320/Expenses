@@ -1,15 +1,20 @@
-package com.i320.expenses;
+package com.i320.expenses.fuel;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.expenses.R;
@@ -17,7 +22,7 @@ import com.example.expenses.R;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class FuelActivity extends AppCompatActivity {
+public class FuelCalculatorActivity extends AppCompatActivity {
 
     private Button button_save, button_show_history;
     private EditText edit_text_money, edit_text_liters, edit_text_KM;
@@ -63,7 +68,7 @@ public class FuelActivity extends AppCompatActivity {
         button_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DataBaseHelperFuel myDB = new DataBaseHelperFuel(FuelActivity.this);
+                FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelCalculatorActivity.this);
 
                 java.util.Date date = new Date();
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -86,6 +91,35 @@ public class FuelActivity extends AppCompatActivity {
         });
     }
 
+    //connect the options menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.option_menu_calculator, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //gives the options menu the functions
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.save) {
+            FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelCalculatorActivity.this);
+
+            java.util.Date date = new Date();
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = formatter.format(date);
+
+            myDB.addRow(format,
+                    getDoubleFromEditText(edit_text_money),
+                    getDoubleFromEditText(edit_text_liters),
+                    getDoubleFromEditText(edit_text_KM));
+
+        }else if (item.getItemId() == R.id.setting){
+            //go to setting
+            //start_activity();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     /**
      * refresh the text on screen

@@ -1,4 +1,4 @@
-package com.i320.expenses;
+package com.i320.expenses.fuel;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -24,7 +24,7 @@ public class FuelHistoryActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     ArrayList<String> fuel_id, fuel_time, fuel_money, fuel_liter, fuel_km;
-    DataBaseHelperFuel myDB;
+    FuelDataBaseHelper myDB;
     CustomAdapter customAdapter;
 
     @Override
@@ -36,7 +36,7 @@ public class FuelHistoryActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycle_view);
 
         //the DB and the lists that hold the DB for the adapter
-        myDB = new DataBaseHelperFuel(FuelHistoryActivity.this);
+        myDB = new FuelDataBaseHelper(FuelHistoryActivity.this);
         fuel_id = new ArrayList<>();
         fuel_time = new ArrayList<>();
         fuel_money = new ArrayList<>();
@@ -75,7 +75,7 @@ public class FuelHistoryActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.delete_all) {
-            DataBaseHelperFuel myDB = new DataBaseHelperFuel(FuelHistoryActivity.this);
+            FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelHistoryActivity.this);
             myDB.removeAllData();
 
             //way to update screen beautifully

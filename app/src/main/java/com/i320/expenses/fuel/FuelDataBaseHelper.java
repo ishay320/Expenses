@@ -1,4 +1,4 @@
-package com.i320.expenses;
+package com.i320.expenses.fuel;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-public class DataBaseHelperFuel extends SQLiteOpenHelper {
+public class FuelDataBaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "Expenses.db";
     private static final int DATABASE_VERSION = 1;
@@ -21,7 +21,7 @@ public class DataBaseHelperFuel extends SQLiteOpenHelper {
     private static final String COLUMN_KM = "fuel_km";
     private final Context context;
 
-    public DataBaseHelperFuel(@Nullable Context context) {
+    public FuelDataBaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }

@@ -10,20 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Expenses" >
         <activity
-            android:name="com.i320.expenses.UpdateActivity"
+            android:name="com.i320.expenses.fuel.FuelUpdateActivity"
             android:label="Update"
             android:exported="true"
-            android:parentActivityName="com.i320.expenses.FuelHistoryActivity"/>
+            android:parentActivityName="com.i320.expenses.fuel.FuelHistoryActivity"/>
         <activity
-            android:name="com.i320.expenses.FuelHistoryActivity"
+            android:name="com.i320.expenses.fuel.FuelHistoryActivity"
             android:exported="true"
             android:label="Fuel History"
-            android:parentActivityName="com.i320.expenses.FuelActivity" />
+            android:parentActivityName="com.i320.expenses.fuel.FuelCalculatorActivity" />
         <activity
             android:name="com.i320.expenses.ManualInput"
             android:exported="true" />
         <activity
-            android:name="com.i320.expenses.FuelActivity"
+            android:name="com.i320.expenses.fuel.FuelCalculatorActivity"
             android:exported="true"
             android:label="Fuel calculator"
             android:parentActivityName="com.i320.expenses.MainMenu" />
