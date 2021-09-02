@@ -6,6 +6,10 @@
             app:key="car_number"
             app:title="car number"
             app:useSimpleSummaryProvider="true"/>
+        <EditTextPreference
+            app:key="car_number2"
+            app:title="car number 2"
+            app:useSimpleSummaryProvider="true"/>
 
 <!--        <ListPreference-->
 <!--            app:defaultValue="reply"-->

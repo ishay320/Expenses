@@ -26,7 +26,7 @@ public class FuelHistoryActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
-    ArrayList<String> fuel_id, fuel_time, fuel_money, fuel_liter, fuel_km;
+    ArrayList<String> fuel_id, fuel_time, fuel_money, fuel_liter, fuel_km,car_number;
     FuelDataBaseHelper myDB;
     CustomAdapter customAdapter;
 
@@ -45,12 +45,13 @@ public class FuelHistoryActivity extends AppCompatActivity {
         fuel_money = new ArrayList<>();
         fuel_liter = new ArrayList<>();
         fuel_km = new ArrayList<>();
+        car_number = new ArrayList<>();
 
         //pull the BD to the arrays
         storeDataInArrays();
 
         //the adapter to the recycle view
-        customAdapter = new CustomAdapter(this, FuelHistoryActivity.this, fuel_id, fuel_time, fuel_money, fuel_liter, fuel_km);
+        customAdapter = new CustomAdapter(this, FuelHistoryActivity.this, fuel_id, fuel_time, fuel_money, fuel_liter, fuel_km,car_number);
 
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(FuelHistoryActivity.this));
@@ -70,7 +71,7 @@ public class FuelHistoryActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.mymenu, menu);
+        inflater.inflate(R.menu.option_menu_history, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -126,6 +127,7 @@ public class FuelHistoryActivity extends AppCompatActivity {
                 fuel_money.add(cursor.getString(2));
                 fuel_liter.add(cursor.getString(3));
                 fuel_km.add(cursor.getString(4));
+                car_number.add(cursor.getString(5));
             }
         }
     }

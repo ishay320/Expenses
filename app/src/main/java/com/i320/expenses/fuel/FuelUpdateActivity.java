@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class FuelUpdateActivity extends AppCompatActivity {
     private EditText edit_text_money, edit_text_liters, edit_text_KM;
     private TextView liters_in_hundred_KM, price_of_liter, KM_per_liter;
     private String id, time;
+    private Spinner drop_down_car;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,8 @@ public class FuelUpdateActivity extends AppCompatActivity {
         KM_per_liter = findViewById(R.id.KMPerLiter2);
         getIntentData();
         refreshText();
+
+        drop_down_car = findViewById(R.id.spinner_car_select);
 
         EditText[] edit_arr = {edit_text_money, edit_text_liters, edit_text_KM};
         for (EditText edit_tmp : edit_arr
@@ -97,7 +101,9 @@ public class FuelUpdateActivity extends AppCompatActivity {
             myDB.updateData(id, time,
                     getDoubleFromEditText(edit_text_money),
                     getDoubleFromEditText(edit_text_liters),
-                    getDoubleFromEditText(edit_text_KM));
+                    getDoubleFromEditText(edit_text_KM),
+                    drop_down_car.getSelectedItem().toString());
+
 
             finish();
         }else if (item.getItemId() == R.id.delete){

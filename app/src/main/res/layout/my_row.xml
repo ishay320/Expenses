@@ -24,9 +24,7 @@
                 android:id="@+id/textView_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:text="@string/money"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/row_text_money"
                 app:layout_constraintTop_toBottomOf="@+id/row_text_money" />
 
@@ -109,6 +107,24 @@
                 android:text="id"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="car number"
+                app:layout_constraintStart_toStartOf="@+id/textView_time"
+                app:layout_constraintTop_toBottomOf="@+id/textView_time" />
+
+            <TextView
+                android:id="@+id/textview_car_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="TextView"
+                app:layout_constraintStart_toEndOf="@+id/textView8"
+                app:layout_constraintTop_toTopOf="@+id/textView8" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

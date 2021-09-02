@@ -26,13 +26,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private final ArrayList<String> fuel_money;
     private final ArrayList<String> fuel_liter;
     private final ArrayList<String> fuel_km;
+    private final ArrayList<String> fuel_car;
+
 
     CustomAdapter(Activity activity, Context context,
                   ArrayList fuel_id,
                   ArrayList fuel_time,
                   ArrayList fuel_money,
                   ArrayList fuel_liter,
-                  ArrayList fuel_km) {
+                  ArrayList fuel_km,
+                  ArrayList fuel_car) {
 
         this.activity = activity;
         this.context = context;
@@ -41,6 +44,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.fuel_money = fuel_money;
         this.fuel_liter = fuel_liter;
         this.fuel_km = fuel_km;
+        this.fuel_car = fuel_car;
 
     }
 
@@ -59,6 +63,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.fuel_money_text.setText(String.valueOf(fuel_money.get(position)));
         holder.fuel_liter_text.setText(String.valueOf(fuel_liter.get(position)));
         holder.fuel_km_text.setText(String.valueOf(fuel_km.get(position)));
+        holder.fuel_car_text.setText(String.valueOf(fuel_car.get(position)));
         holder.main_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +73,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 intent.putExtra("liter", String.valueOf(fuel_liter.get(position)));
                 intent.putExtra("km", String.valueOf(fuel_km.get(position)));
                 intent.putExtra("time", String.valueOf(fuel_time.get(position)));
+                intent.putExtra("car_number",String.valueOf(fuel_car.get(position)));
                 activity.startActivityForResult(intent, 1);
             }
         });
@@ -80,7 +86,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView fuel_id_text, fuel_time_text, fuel_money_text, fuel_liter_text, fuel_km_text;
+        TextView fuel_id_text, fuel_time_text, fuel_money_text, fuel_liter_text, fuel_km_text,fuel_car_text;
         LinearLayout main_layout;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -90,6 +96,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             fuel_money_text = itemView.findViewById(R.id.textView_money);
             fuel_liter_text = itemView.findViewById(R.id.textView_liter);
             fuel_km_text = itemView.findViewById(R.id.textView_km);
+            fuel_car_text = itemView.findViewById(R.id.textview_car_number);
             main_layout = itemView.findViewById(R.id.row_select);
         }
     }

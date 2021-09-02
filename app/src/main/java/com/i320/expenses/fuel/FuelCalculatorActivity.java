@@ -2,6 +2,7 @@ package com.i320.expenses.fuel;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,12 +10,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.example.expenses.R;
 
@@ -26,6 +30,7 @@ public class FuelCalculatorActivity extends AppCompatActivity {
     private Button button_save, button_show_history;
     private EditText edit_text_money, edit_text_liters, edit_text_KM;
     private TextView liters_in_hundred_KM, price_of_liter, KM_per_liter;
+    private Spinner drop_down_car;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,7 @@ public class FuelCalculatorActivity extends AppCompatActivity {
         edit_text_money = findViewById(R.id.TextMoney);
         edit_text_liters = findViewById(R.id.TextLiters);
         edit_text_KM = findViewById(R.id.TextKM);
+        drop_down_car = findViewById(R.id.spinner_car_select);
 
         //apply listener for updating all text from input
         EditText[] edit_arr = {edit_text_money, edit_text_liters, edit_text_KM};
@@ -88,6 +94,23 @@ public class FuelCalculatorActivity extends AppCompatActivity {
                 start_activity(FuelHistoryActivity.class);
             }
         });
+
+
+////drop down menu
+        Spinner dropdown = findViewById(R.id.spinner_car_select);
+//create a list of items for the spinner.
+        String[] items = new String[]{"example car 1", "example car 2", "example car 3"};
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this /* Activity context */);
+        String name = sharedPreferences.getString("car_number", "");
+        items[0] = name;
+        name = sharedPreferences.getString("car_number2", "");
+        items[1] = name;
+//create an adapter to describe how the items are displayed, adapters are used in several places in android.
+//There are multiple variations of this, but this is the basic variant.
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+//set the spinners adapter to the previously created one.
+        dropdown.setAdapter(adapter);
     }
 
     //connect the options menu
@@ -111,7 +134,8 @@ public class FuelCalculatorActivity extends AppCompatActivity {
             myDB.addRow(format,
                     getDoubleFromEditText(edit_text_money),
                     getDoubleFromEditText(edit_text_liters),
-                    getDoubleFromEditText(edit_text_KM));
+                    getDoubleFromEditText(edit_text_KM),
+                    drop_down_car.getSelectedItem().toString());
 
         }else if (item.getItemId() == R.id.setting){
             //go to setting

@@ -2,6 +2,7 @@
 the big data base:
 
 id
+time of buying -- YYYY-MM-DD HH:MI:SS
 name of product
 price  -- actual price
 number of products
@@ -9,10 +10,13 @@ store name
 product serial number
 weight - if not 0\null then calculate the price
 ///////maybe weight of the product?
-
+////// מבצעים?
+////if price is minus then the product has been returned
+// can connect buying with the same time
 
 CREATE TABLE `products` (
 	`_id` INT NOT NULL AUTO_INCREMENT,
+	`time` DATETIME
 	`product_name` TEXT NOT NULL,
 	`price` DECIMAL NOT NULL,
 	`serial_number` INT,
@@ -24,11 +28,21 @@ CREATE TABLE `products` (
 
 example:
 
-_id  |  product_name  |  price  |  serial_number  |  store_name  |  weight
-12      potato           12        null              shefa isaschar 2.53
-14      phone            703       94423455514       snir phones    null
-90      cards            10        null              null           null
+_id  |  time              |  product_name  |  price  |  serial_number  |  store_name  |  weight
+12      YYYY-MM-DD HH:MI:SS  potato           12        null              shefa isaschar 2.53
+14      2021-09-01 12:25:13  phone            703       94423455514       snir phones    null
+90      2021-09-01 12:25:13  cards            10        null              null           null
+100     2021-09-01 12:25:13  spaton           -65.00    null              pniniteva      null
 
+
+
+sub table:
+product_name
+
+store_name
+
+sales
+product_name  |  serial_number  |  store_name  |  how_much  |  how_to_get
 
 
 TODO:
