@@ -43,7 +43,12 @@ public class FuelDataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        if (db.getVersion() == 2){
+            db.setVersion(3);
+        }
+        else {
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        }
         onCreate(db);
     }
 

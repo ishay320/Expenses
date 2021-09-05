@@ -212,7 +212,20 @@
 
     </LinearLayout>
 
-<!--    <Button-->
+    <EditText
+        android:id="@+id/date_picker_actions"
+        android:layout_width="169dp"
+        android:layout_height="50dp"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <!--    <Button-->
 <!--        android:id="@+id/button_delete"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->

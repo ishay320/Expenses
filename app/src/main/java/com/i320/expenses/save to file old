@@ -49,6 +49,7 @@ product_name  |  serial_number  |  store_name  |  how_much  |  how_to_get
 
 
 TODO:
+    *update date fuel
     *choose a button pallet
     *add more car number to BD and to user
     *add the big DB - partly done
@@ -65,7 +66,7 @@ TODO:
 
 
 DONE:
-
+    *added base for update date
 
 
 old FuelActivity
