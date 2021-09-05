@@ -25,8 +25,14 @@
             android:label="Fuel History"
             android:parentActivityName="com.i320.expenses.fuel.FuelCalculatorActivity" />
         <activity
-            android:name="com.i320.expenses.ManualInput"
-            android:exported="true" />
+            android:name="com.i320.expenses.shopping.ProductsManualInput"
+            android:exported="true"
+            android:parentActivityName="com.i320.expenses.MainMenu" />
+        <activity
+            android:name="com.i320.expenses.shopping.ProductsHistoryActivity"
+            android:exported="true"
+            android:parentActivityName="com.i320.expenses.shopping.ProductsManualInput"
+            android:label="Product History" />
         <activity
             android:name="com.i320.expenses.fuel.FuelCalculatorActivity"
             android:exported="true"

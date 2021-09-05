@@ -17,7 +17,7 @@ import com.example.expenses.R;
 
 import java.util.ArrayList;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
+public class FuelCustomAdapter extends RecyclerView.Adapter<FuelCustomAdapter.MyViewHolder> {
 
     private final Context context;
     private final Activity activity;
@@ -29,13 +29,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private final ArrayList<String> fuel_car;
 
 
-    CustomAdapter(Activity activity, Context context,
-                  ArrayList fuel_id,
-                  ArrayList fuel_time,
-                  ArrayList fuel_money,
-                  ArrayList fuel_liter,
-                  ArrayList fuel_km,
-                  ArrayList fuel_car) {
+    FuelCustomAdapter(Activity activity, Context context,
+                      ArrayList fuel_id,
+                      ArrayList fuel_time,
+                      ArrayList fuel_money,
+                      ArrayList fuel_liter,
+                      ArrayList fuel_km,
+                      ArrayList fuel_car) {
 
         this.activity = activity;
         this.context = context;
@@ -50,14 +50,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     @NonNull
     @Override
-    public CustomAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FuelCustomAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.my_row, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CustomAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(@NonNull FuelCustomAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         holder.fuel_id_text.setText(String.valueOf(fuel_id.get(position)));
         holder.fuel_time_text.setText(String.valueOf(fuel_time.get(position)));
         holder.fuel_money_text.setText(String.valueOf(fuel_money.get(position)));
@@ -91,12 +91,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            fuel_id_text = itemView.findViewById(R.id.fuel_id);
-            fuel_time_text = itemView.findViewById(R.id.textView_time);
-            fuel_money_text = itemView.findViewById(R.id.textView_money);
-            fuel_liter_text = itemView.findViewById(R.id.textView_liter);
-            fuel_km_text = itemView.findViewById(R.id.textView_km);
-            fuel_car_text = itemView.findViewById(R.id.textview_car_number);
+            fuel_id_text = itemView.findViewById(R.id.textView_id);
+            fuel_time_text = itemView.findViewById(R.id.textView_time_product);
+            fuel_money_text = itemView.findViewById(R.id.textView_product_name);
+            fuel_liter_text = itemView.findViewById(R.id.textView_price);
+            fuel_km_text = itemView.findViewById(R.id.textView_sn);
+            fuel_car_text = itemView.findViewById(R.id.textview_store_name);
             main_layout = itemView.findViewById(R.id.row_select);
         }
     }

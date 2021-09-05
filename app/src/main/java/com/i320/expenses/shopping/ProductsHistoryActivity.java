@@ -1,4 +1,4 @@
-package com.i320.expenses.fuel;
+package com.i320.expenses.shopping;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,42 +19,44 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.expenses.R;
+import com.i320.expenses.fuel.FuelDataBaseHelper;
 
 import java.util.ArrayList;
 
-public class FuelHistoryActivity extends AppCompatActivity {
+public class ProductsHistoryActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
-    ArrayList<String> fuel_id, fuel_time, fuel_money, fuel_liter, fuel_km,car_number;
-    FuelDataBaseHelper myDB;
-    FuelCustomAdapter fuelCustomAdapter;
+    ArrayList<String> product_id, product_time, product_name, product_price, product_serial_number, product_store_name,product_weight;
+    ProductsDataBaseHelper myDB;
+    ProductsCustomAdapter productsCustomAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fuel_history);
+        setContentView(R.layout.activity_product_history); //maybe can conjoin activities
 
         //what show on the screen
         recyclerView = findViewById(R.id.recycle_view);
 
         //the DB and the lists that hold the DB for the adapter
-        myDB = new FuelDataBaseHelper(FuelHistoryActivity.this);
-        fuel_id = new ArrayList<>();
-        fuel_time = new ArrayList<>();
-        fuel_money = new ArrayList<>();
-        fuel_liter = new ArrayList<>();
-        fuel_km = new ArrayList<>();
-        car_number = new ArrayList<>();
+        myDB = new ProductsDataBaseHelper(ProductsHistoryActivity.this);
+        product_id = new ArrayList<>();
+        product_time = new ArrayList<>();
+        product_name = new ArrayList<>();
+        product_price = new ArrayList<>();
+        product_serial_number = new ArrayList<>();
+        product_store_name = new ArrayList<>();
+        product_weight = new ArrayList<>();
 
         //pull the BD to the arrays
         storeDataInArrays();
 
         //the adapter to the recycle view
-        fuelCustomAdapter = new FuelCustomAdapter(this, FuelHistoryActivity.this, fuel_id, fuel_time, fuel_money, fuel_liter, fuel_km,car_number);
+        productsCustomAdapter = new ProductsCustomAdapter(this, ProductsHistoryActivity.this, product_id, product_time, product_price, product_name, product_serial_number, product_store_name,product_weight);
 
-        recyclerView.setAdapter(fuelCustomAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(FuelHistoryActivity.this));
+        recyclerView.setAdapter(productsCustomAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(ProductsHistoryActivity.this));
 
     }
 
@@ -94,11 +96,11 @@ public class FuelHistoryActivity extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelHistoryActivity.this);
+                ProductsDataBaseHelper myDB = new ProductsDataBaseHelper(ProductsHistoryActivity.this);
                 myDB.removeAllData();
 
                 //way to update screen beautifully
-                Intent intent = new Intent(context, FuelHistoryActivity.class);
+                Intent intent = new Intent(context, ProductsHistoryActivity.class);
                 startActivity(intent);
                 finish();
 
@@ -122,12 +124,13 @@ public class FuelHistoryActivity extends AppCompatActivity {
             findViewById(R.id.imageView_empty).setVisibility(View.INVISIBLE);
             findViewById(R.id.textView_empty).setVisibility(View.INVISIBLE);
             while (cursor.moveToNext()) {//read the data from DB
-                fuel_id.add(cursor.getString(0));
-                fuel_time.add(cursor.getString(1));
-                fuel_money.add(cursor.getString(2));
-                fuel_liter.add(cursor.getString(3));
-                fuel_km.add(cursor.getString(4));
-                car_number.add(cursor.getString(5));
+                product_id.add(cursor.getString(0));
+                product_time.add(cursor.getString(1));
+                product_name.add(cursor.getString(2));
+                product_price.add(cursor.getString(3));
+                product_serial_number.add(cursor.getString(4));
+                product_store_name.add(cursor.getString(5));
+                product_weight.add(cursor.getString(6));
             }
         }
     }

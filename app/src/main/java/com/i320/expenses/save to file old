@@ -13,6 +13,9 @@ weight - if not 0\null then calculate the price
 ////// מבצעים?
 ////if price is minus then the product has been returned
 // can connect buying with the same time
+//picture of receipt - so maybe receipt id? - move store name too
+// pic of product - on another table with connection to all other names
+
 
 CREATE TABLE `products` (
 	`_id` INT NOT NULL AUTO_INCREMENT,
@@ -47,15 +50,21 @@ product_name  |  serial_number  |  store_name  |  how_much  |  how_to_get
 
 TODO:
     *choose a button pallet
-    *add car number to BD and to user
-    *add the big DB
+    *add more car number to BD and to user
+    *add the big DB - partly done
     *add user and password(login), or google login
     *connect the DB to the network
     *add camera
         *read from camera
         *add to DB
     *dashboard with graphs and stuff
+    *connect redundant activities:
+        *update and save - with check and display another text
+        *database - with different functions
+        *history activities
 
+
+DONE:
 
 
 
@@ -127,7 +136,7 @@ public class FuelActivity extends AppCompatActivity {
             });
         }
 
-        //TODO: add functionality and save to drive
+
         button_save = findViewById(R.id.button_save);
         button_save.setOnClickListener(new View.OnClickListener() {
             @Override

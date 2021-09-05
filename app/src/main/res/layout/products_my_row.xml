@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:id="@+id/row_select">
+    android:id="@+id/product_row_select">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
                 android:id="@+id/textView_product_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/money"
+                android:text="@string/product_name"
                 app:layout_constraintStart_toStartOf="@+id/row_text_product_name"
                 app:layout_constraintTop_toBottomOf="@+id/row_text_product_name" />
 
@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                android:text="@string/liters"
+                android:text="@string/price"
                 app:layout_constraintStart_toStartOf="@+id/row_text_liter"
                 app:layout_constraintTop_toBottomOf="@+id/row_text_liter" />
 
@@ -41,7 +41,7 @@
                 android:id="@+id/textView_sn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/km"
+                android:text="serial number"
                 app:layout_constraintStart_toStartOf="@+id/row_text_km"
                 app:layout_constraintTop_toBottomOf="@+id/row_text_km" />
 
@@ -57,8 +57,8 @@
                 android:id="@+id/row_text_product_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="64dp"
-                android:text="@string/money"
+                android:layout_marginStart="16dp"
+                android:text="@string/product_name"
                 app:layout_constraintStart_toEndOf="@+id/textView_time_product"
                 app:layout_constraintTop_toTopOf="@+id/row_text_time" />
 
@@ -66,18 +66,18 @@
                 android:id="@+id/row_text_liter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="42dp"
-                android:text="@string/liters"
-                app:layout_constraintStart_toEndOf="@+id/textView_product_name"
+                android:layout_marginStart="16dp"
+                android:text="@string/price"
+                app:layout_constraintStart_toEndOf="@+id/row_text_product_name"
                 app:layout_constraintTop_toTopOf="@+id/row_text_product_name" />
 
             <TextView
                 android:id="@+id/row_text_km"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="42dp"
-                android:text="@string/km"
-                app:layout_constraintStart_toEndOf="@+id/textView_price"
+                android:layout_marginStart="16dp"
+                android:text="serial_number"
+                app:layout_constraintStart_toEndOf="@+id/row_text_liter"
                 app:layout_constraintTop_toTopOf="@+id/row_text_liter" />
 
             <TextView
@@ -95,6 +95,7 @@
                 android:id="@+id/textView_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:text="id"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -104,16 +105,17 @@
                 android:id="@+id/textView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:text="id"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/textview_store_name" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="car number"
+                android:text="store_name"
                 app:layout_constraintStart_toStartOf="@+id/textView_time_product"
                 app:layout_constraintTop_toBottomOf="@+id/textView_time_product" />
 
@@ -122,9 +124,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="TextView"
+                android:text="store_name"
                 app:layout_constraintStart_toEndOf="@+id/textView8"
                 app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="weight"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView8"
+                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+            <TextView
+                android:id="@+id/textview_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="weight"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/textView8"
+                app:layout_constraintVertical_bias="0.076" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
