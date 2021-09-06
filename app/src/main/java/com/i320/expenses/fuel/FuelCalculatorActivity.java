@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import com.example.expenses.R;
+import com.i320.expenses.database.DataBaseHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -73,7 +74,7 @@ public class FuelCalculatorActivity extends AppCompatActivity {
 //        button_save.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelCalculatorActivity.this);
+//                DataBaseHelper myDB = new DataBaseHelper(FuelCalculatorActivity.this);
 //
 //                java.util.Date date = new Date();
 //                @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -125,13 +126,13 @@ public class FuelCalculatorActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.save) {
-            FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelCalculatorActivity.this);
+            DataBaseHelper myDB = new DataBaseHelper(FuelCalculatorActivity.this);
 
             java.util.Date date = new Date();
             @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String format = formatter.format(date);
 
-            myDB.addRow(format,
+            myDB.addFuelRow(format,
                     getDoubleFromEditText(edit_text_money),
                     getDoubleFromEditText(edit_text_liters),
                     getDoubleFromEditText(edit_text_KM),

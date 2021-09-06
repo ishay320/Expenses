@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.expenses.R;
-import com.i320.expenses.fuel.FuelDataBaseHelper;
+import com.i320.expenses.database.DataBaseHelper;
 
 import java.util.ArrayList;
 
@@ -28,7 +28,7 @@ public class ProductsHistoryActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     ArrayList<String> product_id, product_time, product_name, product_price, product_serial_number, product_store_name,product_weight;
-    ProductsDataBaseHelper myDB;
+    DataBaseHelper myDB;
     ProductsCustomAdapter productsCustomAdapter;
 
     @Override
@@ -40,7 +40,7 @@ public class ProductsHistoryActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycle_view);
 
         //the DB and the lists that hold the DB for the adapter
-        myDB = new ProductsDataBaseHelper(ProductsHistoryActivity.this);
+        myDB = new DataBaseHelper(ProductsHistoryActivity.this);
         product_id = new ArrayList<>();
         product_time = new ArrayList<>();
         product_name = new ArrayList<>();
@@ -96,8 +96,8 @@ public class ProductsHistoryActivity extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                ProductsDataBaseHelper myDB = new ProductsDataBaseHelper(ProductsHistoryActivity.this);
-                myDB.removeAllData();
+                DataBaseHelper myDB = new DataBaseHelper(ProductsHistoryActivity.this);
+                myDB.removeAllProductData();
 
                 //way to update screen beautifully
                 Intent intent = new Intent(context, ProductsHistoryActivity.class);
@@ -119,7 +119,7 @@ public class ProductsHistoryActivity extends AppCompatActivity {
      * read from the array and show the picture if empty
      */
     void storeDataInArrays() {
-        Cursor cursor = myDB.readAllData();
+        Cursor cursor = myDB.readAllProductData();
         if (cursor.getCount() != 0) {//check if DB is empty
             findViewById(R.id.imageView_empty).setVisibility(View.INVISIBLE);
             findViewById(R.id.textView_empty).setVisibility(View.INVISIBLE);

@@ -21,8 +21,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.expenses.R;
+import com.i320.expenses.database.DataBaseHelper;
 
-import java.text.BreakIterator;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -104,7 +104,7 @@ public class FuelUpdateActivity extends AppCompatActivity {
 //        button_update.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelUpdateActivity.this);
+//                DataBaseHelper myDB = new DataBaseHelper(FuelUpdateActivity.this);
 //
 //                myDB.updateData(id, time,
 //                        getDoubleFromEditText(edit_text_money),
@@ -142,9 +142,9 @@ public class FuelUpdateActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.save) {
-            FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelUpdateActivity.this);
+            DataBaseHelper myDB = new DataBaseHelper(FuelUpdateActivity.this);
 
-            myDB.updateData(id, time,
+            myDB.updateFuelData(id, time,
                     getDoubleFromEditText(edit_text_money),
                     getDoubleFromEditText(edit_text_liters),
                     getDoubleFromEditText(edit_text_KM),
@@ -168,8 +168,8 @@ public class FuelUpdateActivity extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelUpdateActivity.this);
-                myDB.deleteRow(id);
+                DataBaseHelper myDB = new DataBaseHelper(FuelUpdateActivity.this);
+                myDB.deleteFuelRow(id);
                 finish();
             }
         });

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.expenses.R;
+import com.i320.expenses.database.DataBaseHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -46,13 +47,13 @@ public class ProductsManualInput extends AppCompatActivity {
                 store_name = editText_store_name.getText().toString();
                 weight = getDoubleFromEditText(editText_weight);
 
-                ProductsDataBaseHelper myDB = new ProductsDataBaseHelper(ProductsManualInput.this);
+                DataBaseHelper myDB = new DataBaseHelper(ProductsManualInput.this);
 
                 java.util.Date date = new Date();
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String format = formatter.format(date);
 
-                myDB.addRow(format,
+                myDB.addProductRow(format,
                         product_name,
                         price,
                         serial_number,

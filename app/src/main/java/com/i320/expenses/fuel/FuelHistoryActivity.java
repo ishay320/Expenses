@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.expenses.R;
+import com.i320.expenses.database.DataBaseHelper;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ public class FuelHistoryActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     ArrayList<String> fuel_id, fuel_time, fuel_money, fuel_liter, fuel_km,car_number;
-    FuelDataBaseHelper myDB;
+    DataBaseHelper myDB;
     FuelCustomAdapter fuelCustomAdapter;
 
     @Override
@@ -39,7 +40,7 @@ public class FuelHistoryActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycle_view);
 
         //the DB and the lists that hold the DB for the adapter
-        myDB = new FuelDataBaseHelper(FuelHistoryActivity.this);
+        myDB = new DataBaseHelper(FuelHistoryActivity.this);
         fuel_id = new ArrayList<>();
         fuel_time = new ArrayList<>();
         fuel_money = new ArrayList<>();
@@ -94,8 +95,8 @@ public class FuelHistoryActivity extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                FuelDataBaseHelper myDB = new FuelDataBaseHelper(FuelHistoryActivity.this);
-                myDB.removeAllData();
+                DataBaseHelper myDB = new DataBaseHelper(FuelHistoryActivity.this);
+                myDB.removeAllFuelData();
 
                 //way to update screen beautifully
                 Intent intent = new Intent(context, FuelHistoryActivity.class);
@@ -117,7 +118,7 @@ public class FuelHistoryActivity extends AppCompatActivity {
      * read from the array and show the picture if empty
      */
     void storeDataInArrays() {
-        Cursor cursor = myDB.readAllData();
+        Cursor cursor = myDB.readAllFuelData();
         if (cursor.getCount() != 0) {//check if DB is empty
             findViewById(R.id.imageView_empty).setVisibility(View.INVISIBLE);
             findViewById(R.id.textView_empty).setVisibility(View.INVISIBLE);
