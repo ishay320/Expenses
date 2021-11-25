@@ -28,6 +28,11 @@ import java.util.Date;
 
 public class FuelCalculatorActivity extends AppCompatActivity {
 
+    //          upload data:
+//        private DatabaseReference mDatabase;
+//        mDatabase = FirebaseDatabase.getInstance().getReference();
+//        mDatabase.child("users").child("userId").child("username").setValue("name");
+
     private Button button_save, button_show_history;
     private EditText edit_text_money, edit_text_liters, edit_text_KM;
     private TextView liters_in_hundred_KM, price_of_liter, KM_per_liter;

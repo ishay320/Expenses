@@ -27,7 +27,10 @@
         <entry key="..\:/Users/ishay/Desktop/Expenses/app/src/main/res/xml/root_preferences.xml" value="0.32592592592592595" />
         <entry key="..\:/android projects/Expenses/app/src/main/res/layout/activity_firebase_ui.xml" value="0.225" />
         <entry key="..\:/android projects/Expenses/app/src/main/res/layout/activity_fuel_calculator.xml" value="0.225" />
-        <entry key="..\:/android projects/Expenses/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/android projects/Expenses/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/android projects/Expenses/app/src/main/res/layout/activity_main_menu.xml" value="0.225" />
+        <entry key="..\:/android projects/Expenses/app/src/main/res/menu/option_menu_history.xml" value="0.225" />
+        <entry key="..\:/android projects/Expenses/app/src/main/res/menu/option_menu_update.xml" value="0.225" />
       </map>
     </option>
   </component>

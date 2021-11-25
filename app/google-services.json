@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "943048579807",
+    "firebase_url": "https://expenses-df274-default-rtdb.firebaseio.com",
     "project_id": "expenses-df274",
     "storage_bucket": "expenses-df274.appspot.com"
   },
