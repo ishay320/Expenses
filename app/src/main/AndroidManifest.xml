@@ -10,43 +10,48 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Expenses">
         <activity
-            android:name="com.i320.expenses.fuel.FuelSettingsActivity"
-            android:exported="true"
-            android:label="@string/title_activity_fuel_settings"
-            android:parentActivityName="com.i320.expenses.fuel.FuelCalculatorActivity"/>
-        <activity
-            android:name="com.i320.expenses.fuel.FuelUpdateActivity"
-            android:exported="true"
-            android:label="Update"
-            android:parentActivityName="com.i320.expenses.fuel.FuelHistoryActivity" />
-        <activity
-            android:name="com.i320.expenses.fuel.FuelHistoryActivity"
-            android:exported="true"
-            android:label="Fuel History"
-            android:parentActivityName="com.i320.expenses.fuel.FuelCalculatorActivity" />
-        <activity
-            android:name="com.i320.expenses.shopping.ProductsManualInput"
-            android:exported="true"
-            android:parentActivityName="com.i320.expenses.MainMenu" />
-        <activity
-            android:name="com.i320.expenses.shopping.ProductsHistoryActivity"
-            android:exported="true"
-            android:parentActivityName="com.i320.expenses.shopping.ProductsManualInput"
-            android:label="Product History" />
-        <activity
-            android:name="com.i320.expenses.fuel.FuelCalculatorActivity"
-            android:exported="true"
-            android:label="Fuel calculator"
-            android:parentActivityName="com.i320.expenses.MainMenu" />
-        <activity
-            android:name="com.i320.expenses.MainMenu"
-            android:exported="true">
+            android:name="com.expenses.LoginActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.expenses.fuel.FuelSettingsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_fuel_settings"
+            android:parentActivityName="com.expenses.fuel.FuelCalculatorActivity" />
+        <activity
+            android:name="com.expenses.fuel.FuelUpdateActivity"
+            android:exported="true"
+            android:label="Update"
+            android:parentActivityName="com.expenses.fuel.FuelHistoryActivity" />
+        <activity
+            android:name="com.expenses.fuel.FuelHistoryActivity"
+            android:exported="true"
+            android:label="Fuel History"
+            android:parentActivityName="com.expenses.fuel.FuelCalculatorActivity" />
+        <activity
+            android:name="com.expenses.shopping.ProductsManualInput"
+            android:exported="true"
+            android:parentActivityName="com.expenses.MainMenu" />
+        <activity
+            android:name="com.expenses.shopping.ProductsHistoryActivity"
+            android:exported="true"
+            android:label="Product History"
+            android:parentActivityName="com.expenses.shopping.ProductsManualInput" />
+        <activity
+            android:name="com.expenses.fuel.FuelCalculatorActivity"
+            android:exported="true"
+            android:label="Fuel calculator"
+            android:parentActivityName="com.expenses.MainMenu" />
+        <activity
+            android:name="com.expenses.MainMenu"
+            android:exported="true"/>
+
     </application>
 
 </manifest>
